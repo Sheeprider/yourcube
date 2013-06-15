@@ -8,9 +8,8 @@
   "description": "World's easiest webrtc",
   "devDependencies": {
     "request": "",
-    "uglify-js": ""
-  },
-  "dependencies": {
-    "connect": "~2.7.11"
+    "uglify-js": "",
+    "socket.io": "",
+    "express": ""
   }
 }
