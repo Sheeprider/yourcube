@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="socket.io/socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script src="js/simplewebrtc.js" ></script>
+        <script src="js/chat.js" ></script>
+        <!-- <script src="js/video.js" ></script> -->
+    </head>
+    <body>
+        <div class="videos">
+            <video id="localVideo" style="height: 150px;"></video>
+            <div id="remotes"></div>
+        </div>
+        <div class="chat">
+            <div class="users"></div>
+            <div class="messages"></div>
+            <input id="data" style="width:200px;" />
+            <input type="button" id="datasend" value="send" />
+        </div>
+    </body>
+</html>
