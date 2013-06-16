@@ -64,8 +64,10 @@ webrtc.on('videoAdded', function(el) {
     if (search.length > 0){
         search.attr('id', 'chatRoom' + userToAdd.userID);
         search.removeClass('empty');
+        var search2 = search.find('.chatName');
+        search2.html(userToAdd.username);
     } else {
-        var div = '<div class="row"><div class="span6"><div id="chatRoom'+ userToAdd.userID +'" class="chatContainer"></div></div><div class="span6"><div id="" class="empty chatContainer"></div></div></div>';
+        var div = '<div class="row"><div class="span6"><div id="chatRoom'+ userToAdd.userID +'" class="chatContainer"><div id="chatName'+ userToAdd.userID +'" class="chatName">'+ userToAdd.username +'</div></div></div><div class="span6"><div id="" class="empty chatContainer"></div><div id="" class="chatName"></div></div></div>';
         $('#chatRooms').append(div);
     }
     $('#chatRoom'+ userToAdd.userID).css({'border': '5px solid '+ userToAdd.color});

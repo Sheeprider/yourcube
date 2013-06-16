@@ -16,6 +16,7 @@
     margin: 10px;
     border: 5px solid #a3bad3;
     text-align: center;
+	position:relative;
 }
 
 .empty {
@@ -61,12 +62,14 @@ video {
 }
 
 .chatName {
-	position:relative;
+	position:absolute;
 	font-size: 14px;
 	font-family: Arial;
 	color: #fff;
-	top:-28px;
+	bottom:24px;
 	text-align:center;
+	left:0;
+	right:0;
 }
 
 .rooms {

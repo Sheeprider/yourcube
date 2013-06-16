@@ -63,7 +63,7 @@ function talk(user, text){
         $('#localVideo').attr('data-original-title', text);
         $('#localVideo').tooltip("show");
     } else {
-        var temp = $('#remotes #chatRoom' + user.userID);
+        var temp = $('#chatRoom' + user.userID);
         $(temp).attr('data-original-title', text);
         $(temp).tooltip("show");
     }
