@@ -77,6 +77,6 @@ webrtc.on('videoAdded', function(el) {
 
 webrtc.on('videoRemoved', function(el) {
   console.log("videoRemoved", el, $(el).attr("id"));
-  usersManager.removeUser(el);
+  userManager.removeUser(el);
   return true;
 });
