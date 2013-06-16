@@ -47,7 +47,7 @@ if (room) {
 
 webrtc.on('videoAdded', function(el) {
     var divID = $(el).attr("id");
-    var addedVideos = $('.chatContainer:not(.empty):not(#localVideo)');
+    var addedVideos = $('.chatContainer:not(.empty):not(#chatRoom0)');
     var addedIDs = [];
     addedVideos.each(function(key, elem){
         if($(elem).attr('id')){
