@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="css/yourcube.css" rel="stylesheet" media="screen">
         <script src="socket.io/socket.io.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="js/simplewebrtc.js" ></script>
         <script src="js/chat.js" ></script>
         <script src="js/video.js" ></script>
+        <script src="js/user.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="rooms"></div>
-        <input id="room" style="width:200px;" />
-        <input type="button" id="addroom" value="add" />
-        <div class="videos" style="display:none;">
-            <video id="localVideo" style="height: 150px;"></video>
-            <div id="remotes"></div>
+        <div id="header">
+            <div id="historyButton">
+                <a href="#">
+                    <img src="img/history.png">
+                </a>
+            </div>
+            <span id="roomTitle">Start a room</span>
+            <br>
+            <span id="subTitle"></span>
+            <form id="createRoom">
+                <input class="input" id="sessionInput"/>
+                <button class="btn" type="submit">Create it!</button>
+            </form>
         </div>
-        <div class="chat" style="display:none;">
-            <div class="users"></div>
-            <div class="messages"></div>
-            <input id="data" style="width:200px;" />
-            <input type="button" id="datasend" value="send" />
+        <div class="rooms"></div>
+        <div class="container">
+            <div id="chatRooms">
+                <div class="row">
+                    <div class="span12"><div id="remotes"><video id="localVideo"></video></div></div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
