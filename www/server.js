@@ -50,9 +50,9 @@ io.sockets.on('connection', function (socket) {
 		// rooms[room] = room;
 		socket.join(socket.room);
 		// echo to client they've connected
-		socket.in(socket.room).emit('updatechat', 'SERVER', 'you have connected to ' + socket.room);
+		socket.in(socket.room).emit('updatechat', {'username': 'SERVER'}, 'you have connected to ' + socket.room);
 		// echo globally (all clients) that a person has connected
-		socket.in(socket.room).broadcast.emit('updatechat', 'SERVER', socket.user.username + ' has connected');
+		socket.in(socket.room).broadcast.emit('updatechat', {'username': 'SERVER'}, socket.user.username + ' has connected');
 		// update the list of users in chat, client-side
 		io.sockets.in(socket.room).emit('updateusers', rooms[socket.room]);
 		// return created user
@@ -71,7 +71,7 @@ io.sockets.on('connection', function (socket) {
 		// update list of users in chat, client-side
 		socket.in(socket.room).emit('updateusers', rooms[socket.room]);
 		// echo globally that this client has left
-		if(socket.user)socket.broadcast.in(socket.room).emit('updatechat', 'SERVER', socket.user.username + ' has disconnected');
+		if(socket.user)socket.broadcast.in(socket.room).emit('updatechat', {'username': 'SERVER'}, socket.user.username + ' has disconnected');
 		// remove the username from room usernames list
 		// console.log(socket.room, socket.user.username);
 		if(socket.room && socket.user){

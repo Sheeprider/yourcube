@@ -1,6 +1,6 @@
 function toggleHistory() {
     $('.chatroomContainer').toggle();
-    
+
 }
 
 // Array Remove - By John Resig (MIT Licensed)
@@ -12,7 +12,6 @@ Array.prototype.remove = function(from, to) {
 
 function chatUser(user) {
     this.color = "#FFFFFF";
-    this.divID = "";
     this.userID = user.userID;
     this.username = user.username;
     this.randomizecolor = function () {
@@ -59,14 +58,11 @@ var userManager = {
 //webrtc.on('videoAdded', shuffle);
 //webrtc.on('videoRemoved', shuffle);
 
-function talk(user, text)
-{
-    if (user === userManager.user)
-    {
+function talk(user, text){
+    if (user === userManager.user){
         $('#localVideo').attr('data-original-title', text);
         $('#localVideo').tooltip("show");
-    } else
-    {
+    } else {
         var temp = $('#remotes #chatRoom' + user.userID);
         $(temp).attr('data-original-title', text);
         $(temp).tooltip("show");
