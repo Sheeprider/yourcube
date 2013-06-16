@@ -1,0 +1,63 @@
+/* 
+
+	OWN CSS For YourCube Project
+
+*/
+
+* {
+	box-sizing : border-box;
+}
+
+.chatContainer {
+	width: 300px;
+	height: 200px;
+	background-color: #a3bad3;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+#chatRooms {
+	text-align: center;
+}
+
+video {
+	width: 300px;
+	height: 200px;
+	background-color: #a3bad3;
+    padding: 10px;
+    margin: 10px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+#header {
+	width:100%;
+	background-color: #d0dfee;
+	padding: 7px;
+	height: 70px;
+	padding-left: 80px;
+	padding-top: 12px;
+	background-image: url('../img/logo.png');
+	background-repeat: no-repeat;
+	background-position: 20px 7px;
+}
+
+#createRoom {
+	padding-top: 4px;
+}
+
+#historyButton{
+	float:right;
+	width: 51px;
+	height: 52px;
+	margin-right: 20px;
+}
+#roomTitle {
+	font-size: 22px;
+	font-weight: bold;
+}

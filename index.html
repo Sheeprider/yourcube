@@ -1,19 +1,19 @@
 <html>
     <head>
         <title>Webrtc.js Demo</title>
+        <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="css/yourcube.css" rel="stylesheet" media="screen">
     </head>
     <body>
-        <h1 id="title">Start a room</h1>
-        <p id="subTitle"></p>
-        <form id="createRoom">
-            <input id="sessionInput"/>
-            <button type="submit">Create it!</button>
-        </form>
-        <video id="localVideo" style="height: 150px;"></video>
-        <div id="remotes"></div>
+        <div id="header"><div id="historyButton"><a href="#"><img src="img/history.png"></a></div><span id="roomTitle">Start a room</span><br><span id="subTitle"></span><form id="createRoom">
+            <input class="input" id="sessionInput"/>
+            <button class="btn" type="submit">Create it!</button>
+        </form></div>
+        <script src="js/fluidgrid.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="http://signaling.simplewebrtc.com:8888/socket.io/socket.io.js"></script>
         <script src="simplewebrtc.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <script>
             // grab the room from the URL
             var room = location.search && location.search.split('?')[1];
@@ -38,7 +38,7 @@
             // Since we use this twice we put it here
             function setRoom(name) {
                 $('form').remove();
-                $('h1').text(name);
+                $('#roomTitle').text(name);
                 $('#subTitle').text('Link to join: ' + location.href);
                 $('body').addClass('active');
             }
@@ -59,5 +59,85 @@
                 });
             }
         </script>
+        <script>
+            function chatUser() {
+                this.color = "#FFFFFF";
+                this.divID = "0";
+                this.userID = "0";
+                this.randomizecolor = function () {
+                    var letters = '0123456789ABCDEF'.split('');
+                        this.color = '#';
+                        for (var i = 0; i < 6; i++ ) {
+                            this.color += letters[Math.round(Math.random() * 15)];
+                        }
+                }
+                this.userDiv="";
+            }
+            var usersManager = {
+                number:0,
+                users: Array(),
+                adduser: function(userID) {
+                    // add the div from the userID with a border
+                    // Take the first available div
+                    newUser = new(chatUser);
+                    newUser.randomizecolor();
+                    this.users.push(newUser);
+
+                    /*
+                    var searchResult = $(".empty");
+                    if (searchResult.length != 0) {
+                        // On attribue la room à quelqu'un
+                        searchResult.removeClass("empty");
+                        searchResult.css({'border': '5px solid '+newUser.color});
+                        newUser.divID = searchResult;
+                    } else
+                    {
+                        // Soit on créé 2 chatrooms...
+                        var userCount = this.users.length;
+                        $("#chatRooms").append('<div class="row"><div class="span6"><div id="chatRoom'+userCount+'" class="empty chatContainer"></div></div><div class="span6"><div id="chatRoom'+(userCount+1)+'" class="empty chatContainer"></div></div></div>');
+                        
+                        // et on en attribue une
+                        searchResult = $(".empty");
+                        searchResult.first().removeClass("empty");
+                        searchResult.first().css({'border': '5px solid '+newUser.color});
+                        newUser.divID = searchResult.first();
+                   }
+                   */
+
+                },
+                removeUser: function(userID) {
+                    // Remove the div from the userID
+                }
+            }
+
+            //var shuffle = getFluidGridFunction('#remotes >');
+            //$(window).on('resize', shuffle);
+            //webrtc.on('videoAdded', shuffle);
+            //webrtc.on('videoRemoved', shuffle);
+
+            function talk(id, text)
+            {
+                if (id == 0)
+                {
+                    $('#localVideo').attr('data-original-title', text);
+                    $('#localVideo').tooltip("show");
+                } else
+                {
+                    var temp = $('#remotes >');
+                    $(temp[1]).attr('data-original-title', text);
+                    $(temp[1]).tooltip("show");
+                }
+            }
+
+        </script>
+        <div class="container">
+            <div id="chatRooms">
+                <div class="row">
+                    <div class="span12"><div id="remotes"><video id="localVideo"></video></div></div>
+                </div>
+            </div>
+        </div>
+        <input type="button" value="Click Me" onclick="talk(1, 'I will say a very very long sentance because it is cool');" >
+
     </body>
 </html>
