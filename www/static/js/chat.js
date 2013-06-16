@@ -38,6 +38,7 @@ socket.on('roomlist', function(rooms){
 // listener, whenever the server emits 'updatechat', this updates the chat body
 socket.on('updatechat', function (username, message) {
     $('.messages').append('<div class="message"><b>'+ username + ':</b> ' + message + '</div>');
+    $('#chatTable').append('<tr><td>'+ username + ':</b> ' + message + '</td></tr>');
 });
 
 // listener, whenever the server emits 'updateusers', this updates the username list
