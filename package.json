@@ -6,7 +6,7 @@
     "url": "git@github.com:henrikjoreteg/webrtc.js.git"
   },
   "description": "World's easiest webrtc",
-  "devDependencies": {
+  "dependencies": {
     "request": "",
     "uglify-js": "",
     "socket.io": "",
