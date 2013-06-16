@@ -2,13 +2,37 @@ var URL = window.location.protocol + "//" + window.location.host;
 console.log("Connecting to " + URL);
 var socket = io.connect(URL);
 
-var username = 'ghjkl';
-var room = 'room1';
+var username = '';
+var letters = '0123456789ABCDEF'.split('');
+for (var i = 0; i < 6; i++ ) {
+   username += letters[Math.round(Math.random() * 15)];
+}
+
+var parser = document.createElement('a');
+parser.href = location.href;
+var room = parser.search.substr(1);
+// pathname
+
+// Query room list on connect
+socket.on('connect', function(){
+    socket.emit('roomlist');
+});
+
 // on connection to server, ask for user's name with an anonymous callback
 socket.on('connect', function(){
     // call the server-side function 'adduser' and send room name and username
-    socket.emit('adduser', room, username);
+    if(room){
+        socket.emit('adduser', room, username);
+    }
     // prompt("What's your name?")
+});
+
+// listener, whenever the server emits 'roomlist', this updates the room list
+socket.on('roomlist', function(rooms){
+    $('.rooms').empty();
+    $.each(rooms, function(key, value) {
+        $('.rooms').append('<a href="?' + key + '">' + key + '</a>');
+    });
 });
 
 // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -41,4 +65,21 @@ $(function(){
             $('#datasend').focus().click();
         }
     });
+
+    // when the client adds a room
+    $('#addroom').click( function() {
+        var room_name = $('#room').val();
+        $('#room').val('');
+        // tell server to execute 'addroom' and send along one parameter
+        socket.emit('addroom', room_name);
+        // automatically join server
+        parser.href = '?' + room_name;
+        location.href = parser;
+        $(this).add('#room').remove();
+    });
+    // if a room is joined
+    if(room){
+        $('#addroom').add('#room').remove();
+        $('.chat').show();
+    }
 });

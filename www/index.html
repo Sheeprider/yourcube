@@ -5,14 +5,17 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
         <script src="js/simplewebrtc.js" ></script>
         <script src="js/chat.js" ></script>
-        <!-- <script src="js/video.js" ></script> -->
+        <script src="js/video.js" ></script>
     </head>
     <body>
-        <div class="videos">
+        <div class="rooms"></div>
+        <input id="room" style="width:200px;" />
+        <input type="button" id="addroom" value="add" />
+        <div class="videos" style="display:none;">
             <video id="localVideo" style="height: 150px;"></video>
             <div id="remotes"></div>
         </div>
-        <div class="chat">
+        <div class="chat" style="display:none;">
             <div class="users"></div>
             <div class="messages"></div>
             <input id="data" style="width:200px;" />

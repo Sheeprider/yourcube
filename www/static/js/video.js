@@ -1,5 +1,5 @@
 // grab the room from the URL
-var room = location.search && location.search.split('?')[1];
+// var room = location.search && location.search.split('?')[1];
 
 // create our webrtc connection
 var webrtc = new WebRTC({
@@ -15,7 +15,10 @@ var webrtc = new WebRTC({
 // when it's ready, join if we got a room from the URL
 webrtc.on('readyToCall', function () {
     // you can name it anything
-    if (room) webrtc.joinRoom(room);
+    if (room){
+        webrtc.joinRoom(room);
+        $('.videos').show();
+    }
 });
 
 // Since we use this twice we put it here
