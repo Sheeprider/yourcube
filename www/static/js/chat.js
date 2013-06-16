@@ -30,9 +30,9 @@ socket.on('connect', function(){
 
 // listener, whenever the server emits 'roomlist', this updates the room list
 socket.on('roomlist', function(rooms){
-    $('.rooms').empty();
+    $('#roomsDropdown').empty();
     $.each(rooms, function(key, value) {
-        $('.rooms').append('<a href="?' + key + '">' + key + '</a>');
+        $('#roomsDropdown').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="?' + key + '">' + key + '</a></li>');
     });
 });
 

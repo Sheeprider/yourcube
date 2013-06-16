@@ -1,3 +1,10 @@
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
 function chatUser(user) {
     this.color = "#FFFFFF";
     this.divID = "";
@@ -23,8 +30,22 @@ var userManager = {
     addMainUser: function(user) {
         this.user = this.addUser(user);
     },
-    removeUser: function(userID) {
+    removeUser: function(el) {
         // Remove the div from the userID
+        var name='.'+el.id;
+        $(name).addClass("empty");
+        $(name).removeClass(el.id);
+        $(el).remove();
+
+        // Delete user when el.id = userID
+        for (var i=0;i<this.users.length;i++)
+        {
+            if ( this.users[i]["userID"] == el.id )
+            {
+                this.users.remove(i);
+                break;
+            }
+        }
     }
 };
 

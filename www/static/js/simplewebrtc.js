@@ -492,7 +492,7 @@ Conversation.prototype.handleRemoteStreamAdded = function (event) {
 Conversation.prototype.handleStreamRemoved = function () {
     var video = document.getElementById(this.id),
         container = this.parent.getRemoteVideoContainer();
-    if (video && container) container.removeChild(video);
+    //if (video && container) container.removeChild(video);
     this.emit('videoRemoved', video);
     delete this.parent.pcs[this.id];
     this.closed = true;
