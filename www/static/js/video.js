@@ -44,3 +44,10 @@ if (room) {
         return false;
     });
 }
+
+
+webrtc.on('videoAdded', function(el) {
+  console.log("videoAdded", el, $(el).attr("id"));
+  usersManager.adduser(el);
+  return true;
+});

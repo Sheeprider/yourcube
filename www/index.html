@@ -7,8 +7,8 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="js/simplewebrtc.js" ></script>
         <script src="js/chat.js" ></script>
-        <script src="js/video.js" ></script>
         <script src="js/user.js"></script>
+        <script src="js/video.js" ></script>
         <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
@@ -30,9 +30,12 @@
         <div class="container">
             <div id="chatRooms">
                 <div class="row">
-                    <div class="span12"><div id="remotes"><video id="localVideo"></video></div></div>
+                    <div class="span6"><div class="chatContainer"><video id="localVideo"></video></div></div>
+                    <div class="span6"><div id="chatRoom1" class="empty chatContainer"></div></div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div id="remotes"></div>
     </body>
 </html>

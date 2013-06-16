@@ -14,14 +14,14 @@ function chatUser() {
 var usersManager = {
     number:0,
     users: Array(),
-    adduser: function(userID) {
+    adduser: function(el) {
         // add the div from the userID with a border
         // Take the first available div
         newUser = new(chatUser);
         newUser.randomizecolor();
         this.users.push(newUser);
+        var userCount = this.users.length;
 
-        /*
         var searchResult = $(".empty");
         if (searchResult.length != 0) {
             // On attribue la room à quelqu'un
@@ -31,7 +31,6 @@ var usersManager = {
         } else
         {
             // Soit on créé 2 chatrooms...
-            var userCount = this.users.length;
             $("#chatRooms").append('<div class="row"><div class="span6"><div id="chatRoom'+userCount+'" class="empty chatContainer"></div></div><div class="span6"><div id="chatRoom'+(userCount+1)+'" class="empty chatContainer"></div></div></div>');
 
             // et on en attribue une
@@ -40,8 +39,10 @@ var usersManager = {
             searchResult.first().css({'border': '5px solid '+newUser.color});
             newUser.divID = searchResult.first();
        }
-       */
 
+      $(el).clone().prependTo("#chatRoom" + userCount);
+      //$("#chatRoom" + userCount + " video").prop('muted', true);
+      $(el).remove();
     },
     removeUser: function(userID) {
         // Remove the div from the userID
@@ -66,3 +67,4 @@ function talk(id, text)
         $(temp[1]).tooltip("show");
     }
 }
+
