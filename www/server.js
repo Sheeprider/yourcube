@@ -63,7 +63,7 @@ io.sockets.on('connection', function (socket) {
 	socket.on('sendchat', function (message) {
 		// console.log(socket);
 		// we tell the client to execute 'updatechat' with 2 parameters
-		io.sockets.in(socket.room).emit('updatechat', socket.user.username, message);
+		io.sockets.in(socket.room).emit('updatechat', socket.user, message);
 	});
 
 	// when the user disconnects.. perform this

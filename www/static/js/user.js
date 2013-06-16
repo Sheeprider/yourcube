@@ -59,16 +59,16 @@ var userManager = {
 //webrtc.on('videoAdded', shuffle);
 //webrtc.on('videoRemoved', shuffle);
 
-function talk(id, text)
+function talk(user, text)
 {
-    if (id === 0)
+    if (user === userManager.user)
     {
         $('#localVideo').attr('data-original-title', text);
         $('#localVideo').tooltip("show");
     } else
     {
-        var temp = $('#remotes >');
-        $(temp[1]).attr('data-original-title', text);
-        $(temp[1]).tooltip("show");
+        var temp = $('#remotes #chatRoom' + user.userID);
+        $(temp).attr('data-original-title', text);
+        $(temp).tooltip("show");
     }
 }
