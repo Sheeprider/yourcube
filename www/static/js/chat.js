@@ -67,19 +67,14 @@ $(function(){
     });
 
     // when the client adds a room
-    $('#addroom').click( function() {
-        var room_name = $('#room').val();
-        $('#room').val('');
+    $('#createRoom').submit(function() {
+        var room_name = $('#roomName').val();
+        $('#roomName').val('');
         // tell server to execute 'addroom' and send along one parameter
         socket.emit('addroom', room_name);
         // automatically join server
         parser.href = '?' + room_name;
         location.href = parser;
-        $(this).add('#room').remove();
+        return false;
     });
-    // if a room is joined
-    if(room){
-        $('#addroom').add('#room').remove();
-        $('.chat').show();
-    }
 });
