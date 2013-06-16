@@ -24,7 +24,7 @@ webrtc.on('readyToCall', function () {
 // Since we use this twice we put it here
 function setRoom(name) {
     $('form').remove();
-    $('h1').text(name);
+    $('#roomTitle').text(name);
     $('#subTitle').text('Link to join: ' + location.href);
     $('body').addClass('active');
 }
@@ -49,5 +49,12 @@ if (room) {
 webrtc.on('videoAdded', function(el) {
   console.log("videoAdded", el, $(el).attr("id"));
   usersManager.adduser(el);
+  return true;
+});
+
+
+webrtc.on('videoRemoved', function(el) {
+  console.log("videoRemoved", el, $(el).attr("id"));
+  usersManager.removeUser(el);
   return true;
 });
