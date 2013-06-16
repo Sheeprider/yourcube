@@ -2,6 +2,7 @@ var URL = window.location.protocol + "//" + window.location.host;
 console.log("Connecting to " + URL);
 var socket = io.connect(URL);
 
+// Generate random username
 var username = '';
 var letters = '0123456789ABCDEF'.split('');
 for (var i = 0; i < 6; i++ ) {
@@ -11,18 +12,18 @@ for (var i = 0; i < 6; i++ ) {
 var parser = document.createElement('a');
 parser.href = location.href;
 var room = parser.search.substr(1);
-// pathname
 
 // Query room list on connect
 socket.on('connect', function(){
     socket.emit('roomlist');
 });
 
-// on connection to server, ask for user's name with an anonymous callback
 socket.on('connect', function(){
     // call the server-side function 'adduser' and send room name and username
     if(room){
-        socket.emit('adduser', room, username);
+        socket.emit('adduser', room, username, function(user) {
+            userManager.addMainUser(user);
+        });
     }
     // prompt("What's your name?")
 });
@@ -37,7 +38,8 @@ socket.on('roomlist', function(rooms){
 
 // listener, whenever the server emits 'updatechat', this updates the chat body
 socket.on('updatechat', function (username, message) {
-    $('.messages').append('<div class="message"><b>'+ username + ':</b> ' + message + '</div>');
+    // talk(id, message);
+    // $('.messages').append('<div class="message"><b>'+ username + ':</b> ' + message + '</div>');
 });
 
 // listener, whenever the server emits 'updateusers', this updates the username list
