@@ -59,7 +59,7 @@ var userManager = {
 //webrtc.on('videoRemoved', shuffle);
 
 function talk(user, text){
-    if (user === userManager.user){
+    if (user.username === userManager.user.username){
         $('#localVideo').attr('data-original-title', text);
         $('#localVideo').tooltip("show");
     } else {
