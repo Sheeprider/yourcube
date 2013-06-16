@@ -21,11 +21,10 @@ socket.on('connect', function(){
 socket.on('connect', function(){
     // call the server-side function 'adduser' and send room name and username
     if(room){
-        socket.emit('adduser', room, username, function(user) {
+        socket.emit('adduser', room, prompt("What's your name?"), function(user) {
             userManager.addMainUser(user);
         });
     }
-    // prompt("What's your name?")
 });
 
 // listener, whenever the server emits 'roomlist', this updates the room list
@@ -46,7 +45,12 @@ socket.on('updatechat', function (user, message) {
 // listener, whenever the server emits 'updateusers', this updates the username list
 socket.on('updateusers', function(data) {
     $('.users').empty();
-    $.each(data, function(key, value) {
+    $.each(data, function(key, user) {
+        $(userManager.users).each(function(key, savedUser){
+            if (user.userID !== savedUser.userID){
+                userManager.addUser(user);
+            }
+        });
         $('.users').append('<div>' + key + '</div>');
     });
 });

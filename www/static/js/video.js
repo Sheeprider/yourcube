@@ -68,7 +68,7 @@ webrtc.on('videoAdded', function(el) {
         var div = '<div class="row"><div class="span6"><div id="chatRoom'+ userToAdd.userID +'" class="chatContainer"></div></div><div class="span6"><div id="" class="empty chatContainer"></div></div></div>';
         $('#chatRooms').append(div);
     }
-    // $('#chatRoom'+ userToAdd.userID).css({'border': '5px solid '+ userToAdd.color});
+    $('#chatRoom'+ userToAdd.userID).css({'border': '5px solid '+ userToAdd.color});
 
     $(el).clone().appendTo('#chatRoom'+ userToAdd.userID);
     $(el).remove();
