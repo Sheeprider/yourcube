@@ -427,7 +427,6 @@ Conversation.prototype.handleMessage = function (message) {
     } else if (message.type === 'answer') {
         this.pc.setRemoteDescription(new RTCSessionDescription(message.payload));
     } else if (message.type === 'candidate') {
-        console.log('message.payload', message.payload);
         var candidate = new RTCIceCandidate({
             sdpMLineIndex: message.payload.label,
             candidate: message.payload.candidate

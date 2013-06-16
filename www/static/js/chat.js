@@ -70,14 +70,14 @@ $(function(){
     });
 
     // when the client adds a room
-    $('#createRoom').submit(function() {
+    $('#createRoom').submit(function(e) {
         var room_name = $('#roomName').val();
         $('#roomName').val('');
         // tell server to execute 'addroom' and send along one parameter
         socket.emit('addroom', room_name);
         // automatically join server
-        parser.href = '?' + room_name;
-        location.href = parser;
-        return false;
+        parser.search = '?' + room_name;
+        location.href = parser.href;
+        e.preventDefault();
     });
 });

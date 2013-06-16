@@ -32,8 +32,8 @@ function setRoom(name) {
 if (room) {
     setRoom(room);
 } else {
-    $('form').submit(function () {
-        var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
+    $('#createRoom').submit(function () {
+        var val = $('#roomName').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
         webrtc.createRoom(val, function (err, name) {
             var newUrl = location.pathname + '?' + name;
             if (!err) {
@@ -60,7 +60,6 @@ webrtc.on('videoAdded', function(el) {
             userToAdd = user;
         }
     });
-    // var userToAdd = userManager.users[userManager.users.length - 1];
     var search = $('#chatRooms .empty');
     if (search.length > 0){
         search.attr('id', 'chatRoom' + userToAdd.userID);
@@ -69,14 +68,13 @@ webrtc.on('videoAdded', function(el) {
         var div = '<div class="row"><div class="span6"><div id="chatRoom'+ userToAdd.userID +'" class="chatContainer"></div></div><div class="span6"><div id="" class="empty chatContainer"></div></div></div>';
         $('#chatRooms').append(div);
     }
-    $('#chatRoom'+ userToAdd.userID).css({'border': '5px solid '+userToAdd.color});
+    // $('#chatRoom'+ userToAdd.userID).css({'border': '5px solid '+ userToAdd.color});
 
     $(el).clone().appendTo('#chatRoom'+ userToAdd.userID);
     $(el).remove();
 });
 
 webrtc.on('videoRemoved', function(el) {
-  console.log("videoRemoved", el, $(el).attr("id"));
   userManager.removeUser(el);
   return true;
 });
