@@ -1,70 +1,62 @@
-function toggleHistory() {
-    $('.chatroomContainer').toggle();
+var letters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
-}
+// function toggleHistory() {
+//     $('.chatroomContainer').toggle();
+// }
 
 // Array Remove - By John Resig (MIT Licensed)
-Array.prototype.remove = function(from, to) {
-  var rest = this.slice((to || from) + 1 || this.length);
-  this.length = from < 0 ? this.length + from : from;
-  return this.push.apply(this, rest);
-};
+// Array.prototype.remove = function(from, to) {
+//     var rest = this.slice((to || from) + 1 || this.length);
+//     this.length = from < 0 ? this.length + from : from;
+//     return this.push.apply(this, rest);
+// };
 
-function chatUser(user) {
+function chatUser(username, room) {
     this.color = "#FFFFFF";
-    this.userID = user.userID;
-    this.username = user.username;
-    this.randomizecolor = function () {
-        var letters = '0123456789ABCDEF'.split('');
-            this.color = '#';
-            for (var i = 0; i < 6; i++ ) {
-                this.color += letters[Math.round(Math.random() * 15)];
-            }
-    };
-    this.userDiv="";
+    this.userID = '';
+    this.username = username;
+    this.randomizeID();
 }
-var userManager = {
-    users: [],
-    addUser: function(user) {
-        newUser = new chatUser(user);
-        newUser.randomizecolor();
-        this.users.push(newUser);
-        return newUser;
-    },
-    addMainUser: function(user) {
-        this.user = this.addUser(user);
-    },
-    removeUser: function(el) {
-        // Remove the div from the userID
-        var name='.'+el.id;
-        $(name).addClass("empty");
-        $(name).removeClass(el.id);
-        $(el).remove();
 
-        // Delete user when el.id = userID
-        for (var i=0;i<this.users.length;i++)
-        {
-            if ( this.users[i]["userID"] == el.id )
-            {
-                this.users.remove(i);
-                break;
-            }
-        }
+chatUser.prototype.randomizeID = function () {
+    for (var i = 0; i < 20; i++ ) {
+        this.userID += letters[Math.round(Math.random() * 36)];
+    }
+};
+chatUser.prototype.randomizecolor = function () {
+    this.color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        this.color += letters[Math.round(Math.random() * 15)];
     }
 };
 
-//var shuffle = getFluidGridFunction('#remotes >');
-//$(window).on('resize', shuffle);
-//webrtc.on('videoAdded', shuffle);
-//webrtc.on('videoRemoved', shuffle);
+var userManager = function(name){
+    this.name = name;
+    this.users = {};
+};
+userManager.prototype.addUser = function(username) {
+    newUser = new chatUser(username);
+    newUser.randomizecolor();
+    this.users[newUser.userID] = newUser;
+    return newUser;
+};
+userManager.prototype.removeUser = function(userID) {
+    delete this.users[userID];
+    // Remove the div from the userID
+    // var name='.'+el.id;
+    // $(name).addClass("empty");
+    // $(name).removeClass(el.id);
+    // $(el).remove();
 
-function talk(user, text){
-    if (user.username === userManager.user.username){
-        $('#localVideo').attr('data-original-title', text);
-        $('#localVideo').tooltip("show");
-    } else {
-        var temp = $('#chatRoom' + user.userID);
-        $(temp).attr('data-original-title', text);
-        $(temp).tooltip("show");
-    }
-}
+    // // Delete user when el.id = userID
+    // for (var i=0;i<this.users.length;i++)
+    // {
+    //     if ( this.users[i]["userID"] == el.id )
+    //     {
+    //         this.users.remove(i);
+    //         break;
+    //     }
+    // }
+};
+
+module.exports = userManager;

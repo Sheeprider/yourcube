@@ -45,7 +45,8 @@ if (room) {
     });
 }
 
-webrtc.on('videoAdded', function(el) {
+webrtc.on('videoAdded', function(el, a, b, c) {
+    console.log(a, b, c)
     var divID = $(el).attr("id");
     var addedVideos = $('.chatContainer:not(.empty):not(#chatRoom0)');
     var addedIDs = [];
@@ -80,3 +81,9 @@ webrtc.on('videoRemoved', function(el) {
   userManager.removeUser(el);
   return true;
 });
+
+
+//var shuffle = getFluidGridFunction('#remotes >');
+//$(window).on('resize', shuffle);
+//webrtc.on('videoAdded', shuffle);
+//webrtc.on('videoRemoved', shuffle);
