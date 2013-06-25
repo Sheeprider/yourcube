@@ -4,9 +4,9 @@
 // create our webrtc connection
 var webrtc = new WebRTC({
     // the id/element dom element that will hold "our" video
-    localVideoEl: 'localVideo',
+    localVideoEl: 'videos',
     // the id/element dom element that will hold remote videos
-    remoteVideosEl: 'remotes',
+    remoteVideosEl: 'videos',
     // immediately ask for camera access
     autoRequestMedia: true,
     log: false
@@ -46,7 +46,7 @@ if (room) {
 }
 webrtc.on('readyToCall', function(conversation_id){
     socket.emit('user.set', 'videoID', conversation_id);
-    $('#localVideo video').attr('id', conversation_id);
+    $('#videos video:first()').attr('id', conversation_id);
 });
 // webrtc.on('videoAdded', function(element, conversation) {
 // });

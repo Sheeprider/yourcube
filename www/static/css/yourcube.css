@@ -27,8 +27,8 @@
 }
 
 video {
-	width: 320px;
-	height: 200px;
+	width: 300px;
+	margin: 5px;
 }
 
 #header {
@@ -78,7 +78,6 @@ video {
 .chatroomContainer {
 	margin: 10px;
 	margin-top: 60px;
-	width: 798px;
 	background-color: #a3bad3;
 	border-radius: 6px;
 	padding: 10px;
