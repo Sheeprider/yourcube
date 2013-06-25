@@ -23,7 +23,7 @@ webrtc.on('readyToCall', function () {
 
 // Since we use this twice we put it here
 function setRoom(name) {
-    $('form').remove();
+    $('#createRoom').remove();
     $('#roomTitle').text(name);
     $('#subTitle').text('Link to join: ' + location.href);
     $('body').addClass('active');
@@ -44,46 +44,12 @@ if (room) {
         return false;
     });
 }
-
-webrtc.on('videoAdded', function(el, a, b, c) {
-    console.log(a, b, c)
-    var divID = $(el).attr("id");
-    var addedVideos = $('.chatContainer:not(.empty):not(#chatRoom0)');
-    var addedIDs = [];
-    addedVideos.each(function(key, elem){
-        if($(elem).attr('id')){
-            addedIDs.push($(elem).attr('id').substr(8));
-        }
-    });
-    var userToAdd = {};
-    $(userManager.users).each(function(key, user){
-        if (addedIDs.indexOf(user.userID) < 0){
-            userToAdd = user;
-        }
-    });
-    var search = $('#chatRooms .empty');
-    if (search.length > 0){
-        search.attr('id', 'chatRoom' + userToAdd.userID);
-        search.removeClass('empty');
-        var search2 = search.find('.chatName');
-        search2.html(userToAdd.username);
-    } else {
-        var div = '<div class="row"><div class="span6"><div id="chatRoom'+ userToAdd.userID +'" class="chatContainer"><div id="chatName'+ userToAdd.userID +'" class="chatName">'+ userToAdd.username +'</div></div></div><div class="span6"><div id="" class="empty chatContainer"></div><div id="" class="chatName"></div></div></div>';
-        $('#chatRooms').append(div);
-    }
-    $('#chatRoom'+ userToAdd.userID).css({'border': '5px solid '+ userToAdd.color});
-
-    $(el).clone().appendTo('#chatRoom'+ userToAdd.userID);
-    $(el).remove();
+webrtc.on('readyToCall', function(conversation_id){
+    socket.emit('user.set', 'videoID', conversation_id);
+    $('#localVideo video').attr('id', conversation_id);
 });
+// webrtc.on('videoAdded', function(element, conversation) {
+// });
 
-webrtc.on('videoRemoved', function(el) {
-  userManager.removeUser(el);
-  return true;
-});
-
-
-//var shuffle = getFluidGridFunction('#remotes >');
-//$(window).on('resize', shuffle);
-//webrtc.on('videoAdded', shuffle);
-//webrtc.on('videoRemoved', shuffle);
+// webrtc.on('videoRemoved', function(el) {
+// });

@@ -11,13 +11,13 @@ var letters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 //     return this.push.apply(this, rest);
 // };
 
-function chatUser(username, room) {
+var chatUser = function(username, room) {
     this.color = "#FFFFFF";
     this.userID = '';
+    this.videoID = '';
     this.username = username;
     this.randomizeID();
-}
-
+};
 chatUser.prototype.randomizeID = function () {
     for (var i = 0; i < 20; i++ ) {
         this.userID += letters[Math.round(Math.random() * 36)];
@@ -39,6 +39,10 @@ userManager.prototype.addUser = function(username) {
     newUser.randomizecolor();
     this.users[newUser.userID] = newUser;
     return newUser;
+};
+userManager.prototype.editUser = function(userID, attribute, value) {
+    this.users[userID][attribute] = value;
+    return this.users[userID];
 };
 userManager.prototype.removeUser = function(userID) {
     delete this.users[userID];

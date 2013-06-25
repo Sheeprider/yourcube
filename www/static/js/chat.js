@@ -17,9 +17,7 @@ var room = parser.search.substr(1);
 // Query room list on connect
 socket.on('connect', function(){
     socket.emit('room.get');
-});
 
-socket.on('connect', function(){
     // console.log(socket.room);
     // call the server-side function 'user.add' and send room name and username
     if(room){

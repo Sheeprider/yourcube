@@ -26,11 +26,9 @@
                 <ul id="roomsDropdown" class="dropdown-menu" role="menu" aria-labelledby="drop4">
         </div>
         <div class="container">
-            <div id="chatRooms">
-                <div class="row">
-                    <div class="span6"><div id="chatRoom0" class="chatContainer"><video id="localVideo"></video><div id="chatName0" class="chatName"></div></div></div>
-                    <div class="span6"><div id="chatRoom1" class="empty chatContainer"><div id="chatName1" class="chatName"></div></div></div>
-                </div>
+            <div id="videos">
+                <div id="localVideo"></div>
+                <div id="remotes"></div>
             </div>
             <div class="chatroomContainer span9">
                 <div class="input-append">
@@ -40,13 +38,11 @@
                 <div id="messages"></div>
             </div>
         </div>
-        <div id="remotes"></div>
         <script src="socket.io/socket.io.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/simplewebrtc.js" ></script>
-        <!-- <script src="js/user.js"></script> -->
         <script src="js/chat.js" ></script>
-        <!-- <script src="js/video.js" ></script> -->
+        <script src="js/video.js" ></script>
     </body>
 </html>

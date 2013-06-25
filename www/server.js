@@ -29,10 +29,6 @@ io.sockets.on('connection', function (socket) {
 	socket.on('room.get', function(){
 		socket.emit('room.list', rooms);
 	});
-	// socket.on('room.add', function(room){
-	// 	rooms[room] = new userManager(room);
-	// 	io.sockets.emit('room.list', rooms);
-	// });
 	socket.on('room.delete', function(room){
 		// TODO : notify room's occupants the room is closed ?
 		if(socket.room){
@@ -49,6 +45,10 @@ io.sockets.on('connection', function (socket) {
 	});
 	socket.on('user.get', function(){
 		socket.in(socket.room).emit('user.user', socket.user);
+	});
+	socket.on('user.set', function (attribute, value){
+		socket.user = socket.room.editUser(socket.user.userID, attribute, value);
+		socket.in(socket.room).broadcast.emit('user.list', socket.room.users);
 	});
 	socket.on('user.add', function (room, username) {
 		// Save your room and join it
